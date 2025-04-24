@@ -171,7 +171,8 @@
                         <h2 class="title">About Me</h2>
                         <p><strong>Full-Stack Developer | Angular & Laravel Enthusiast</strong></p>
                         <p>
-                            I’m a 22-year-old full-stack developer with a strong focus on both front-end and back-end
+                            I’m a <span id="age"></span>-year-old full-stack developer with a strong focus on both
+                            front-end and back-end
                             technologies. On the front
                             end, I specialize in Angular and Vue.js, and I have solid expertise in JavaScript and
                             TypeScript.
@@ -678,7 +679,21 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+    <script>
+        function calculateAge(birthDateString) {
+            const today = new Date();
+            const birthDate = new Date(birthDateString);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
 
+            // Adjust if birthday hasn't occurred yet this year
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+        document.querySelector("#age").textContent = calculateAge("2001-02-28");
+    </script>
 </body>
 
 </html>
